@@ -6,7 +6,7 @@ $username = "";
 $errors = array(); 
 
 // connect to the db
-$db = mysqli_connect('localhost', 'root', '', 'MyNoteDb');
+$db = mysqli_connect('localhost', 'root', '', 'atestatDB');
 
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
@@ -73,11 +73,4 @@ if (isset($_POST['login_user'])) {
   }
 }
 
-
-
-
-
-
-
-
-
+?>

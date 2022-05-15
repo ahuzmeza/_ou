@@ -22,9 +22,9 @@
 
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-             <ul class="nav navbar-nav">
-          <li class="active" style="font-size:12px;"><a href="../index.php">Home</a></li>
-        </ul>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.php"> Back </a>
+            </div>
         </div>
     </nav>
 

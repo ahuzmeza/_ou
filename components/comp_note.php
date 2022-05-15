@@ -1,28 +1,25 @@
 <?php if (isset($_SESSION['username'])) : 
 
-    $usr = $_SESSION['username']; 
-    $note_id = $_GET['note_id'];
-
-    $_SESSION['note_id'] = $note_id;
-
-    $sql_get = "SELECT note_body
-                FROM user_notes 
-                WHERE id = '$note_id';";
-    $content = mysqli_query($db, $sql_get);
-    $result = mysqli_fetch_array($content);
-    $note_body = $result['note_body'];
-    // gets what was previously in the DB 
-    // for the body of the note
+        $usr = $_SESSION['username']; 
+    
+        $sql_get = "SELECT body 
+                    FROM users 
+                    WHERE username = '$usr' ;";
+        $content = mysqli_query($db, $sql_get);
+        $result = mysqli_fetch_array($content);
+        $body_inDb = $result['body'];
+        // gets what was previously in the DB 
+        // for the body of the note
+        
+/* ======================================== */     
 ?>
-
-    <a class="btn delete-note my-2 my-sm-0" href="../api/delete_note.php">
-    Delete note 
-    </a>
-
+    
     <form class="note" method="get" action="index.php" name="note_form" id="form">
+
+        <tittle class="note__title"> <?php echo $usr ?>'s note </tittle>
         
         <textarea class="note__body" type="text" id="noteBody"> 
-            <?php echo ($note_body); ?>
+            <?php echo ($body_inDb); ?>
         </textarea>
         
     </form>
@@ -48,7 +45,7 @@ textInput.onkeyup = function (e) {
         {
             var txt = $("#noteBody").val();
               $.ajax({
-                url:"../api/save_note.php?data="+txt,
+                url:"api/save_note.php?data="+txt,
                 type: 'GET',
                 data: {noteBody: txt },
                 success: 
@@ -58,7 +55,7 @@ textInput.onkeyup = function (e) {
                         // changes color of background to visualize savestate
                         var el = document.getElementById('form');
                         var original = el.style.color;
-                        el.style.backgroundColor='#004d1a';
+                        el.style.backgroundColor='#ccffcc';
                         window.setTimeout(function() { 
                                 el.style.backgroundColor = original; 
                         }, 600); 
@@ -68,6 +65,5 @@ textInput.onkeyup = function (e) {
         }, 600); // save timer 
     
 }; // endscript
-
-
+    
 </script>

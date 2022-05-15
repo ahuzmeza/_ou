@@ -19,13 +19,13 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-         <ul class="nav navbar-nav">
-      <li class="active" style="font-size:12px;"><a href="../index.php">Home</a></li>
-    </ul>
-    </div>
-</nav>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.php"> Back </a>
+            </div>
+        </div>
+    </nav>
     
     <div class="modal-dialog modal-login">
     <div class="modal-content">
