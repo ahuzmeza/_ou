@@ -1,0 +1,60 @@
+.nav-area {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-nav-round{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: green;
+    border: 1px ridge black;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: white;
+    -webkit-box-shadow: 0px 5px 15px -4px rgba(0,0,0,0.55); 
+    box-shadow: 0px 5px 15px -4px rgba(0,0,0,0.55);
+    text-decoration: none;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-top: 7px;
+}
+
+.btn-nav-round:hover {
+    background-color: black;
+    transform: scale(1.1);
+}
+
+.btn-nav-profile {
+    width: 64px !important;
+    height: 64px !important;
+    margin-top: 5px !important;
+}
+
+.badge {
+    height: 35px !important;
+    width: 35px !important;
+    position: relative;
+    margin-top: 55px;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border-radius: 50% !important;
+    background: red;
+    color: white;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+    
+.glyph-icon {
+    font-size: 30px;
+    color: white;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.glyph-icon-notification {
+    margin-right: -42px;
+}

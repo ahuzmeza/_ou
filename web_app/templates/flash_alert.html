@@ -1,0 +1,24 @@
+{% block flash_alert %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    {% for category, message in messages %}
+        {% if category == 'error' %}
+            <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                {{message}} 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+        {% elif category == 'error' %}
+            <div class="alert alert-succes alert-dismissable fade show" role="alert">
+                <h1> {{message}} </h1>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% endwith %}
+
+{% endblock %}

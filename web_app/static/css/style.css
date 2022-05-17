@@ -1,8 +1,8 @@
 html,
 body * {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+          box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -34,21 +34,21 @@ body {
   border-top: solid 2px rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+          box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
 #check path {
   stroke: #ffffff;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 0.85px;
+  stroke-width: .85px;
   stroke-dasharray: 60px 300px;
   stroke-dashoffset: -166px;
   fill: rgba(255, 255, 255, 0);
-  -webkit-transition: stroke-dashoffset 2s ease 0.5s, fill 1.5s ease 1s;
-  transition: stroke-dashoffset 2s ease 0.5s, fill 1.5s ease 1s;
+  -webkit-transition: stroke-dashoffset 2s ease .5s, fill 1.5s ease 1.0s;
+  transition: stroke-dashoffset 2s ease .5s, fill 1.5s ease 1.0s;
 }
 
 #check.checked path {
@@ -77,13 +77,13 @@ li {
   border-top: solid 2px rgba(255, 255, 255, 0.5);
   border-radius: 20px;
   -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
 .frame-long {
-  height: 550px;
+  height: 580px;
 }
 
 .auth-nav {
@@ -91,8 +91,8 @@ li {
   height: 100px;
   padding-top: 20px;
   opacity: 1;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
 .signin-active a {
@@ -100,8 +100,8 @@ li {
   color: #4cbc18;
   text-decoration: none;
   border-bottom: solid 4px #4cbc18;
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
   cursor: pointer;
 }
 
@@ -125,8 +125,8 @@ li {
   cursor: pointer;
   color: white;
   text-decoration: none;
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
+  -webkit-transition: all .25s ease;
+  transition: all .25s ease;
 }
 
 .form-signin {
@@ -135,17 +135,16 @@ li {
   font-weight: 300;
   padding-left: 37px;
   padding-right: 37px;
-  -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
-  transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  transition: opacity 0.5s ease, transform 0.5s ease,
-    -webkit-transform 0.5s ease;
+  -webkit-transition: opacity .5s ease, -webkit-transform .5s ease;
+  transition: opacity .5s ease, -webkit-transform .5s ease;
+  transition: opacity .5s ease, transform .5s ease;
+  transition: opacity .5s ease, transform .5s ease, -webkit-transform .5s ease;
 }
 
 .form-signin-left {
   -webkit-transform: translateX(-400px);
-  transform: translateX(-400px);
-  opacity: 0;
+          transform: translateX(-400px);
+  opacity: .0;
 }
 
 .form-signup {
@@ -160,13 +159,13 @@ li {
   top: -375px;
   left: 400px;
   opacity: 0;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
 .form-signup-left {
   -webkit-transform: translateX(-399px);
-  transform: translateX(-399px);
+          transform: translateX(-399px);
   opacity: 1;
 }
 
@@ -212,8 +211,8 @@ textarea:focus {
   background: rgba(255, 255, 255, 0.3);
   border: none;
   padding-right: 40px;
-  -webkit-transition: background 0.5s ease;
-  transition: background 0.5s ease;
+  -webkit-transition: background .5s ease;
+  transition: background .5s ease;
 }
 
 [type="checkbox"]:not(:checked),
@@ -235,7 +234,7 @@ textarea:focus {
 [type="checkbox"]:checked + label:before,
 [type="checkbox"]:not(:checked) + label:after,
 [type="checkbox"]:checked + label:after {
-  content: "";
+  content: '';
   position: absolute;
 }
 
@@ -247,8 +246,8 @@ textarea:focus {
   border-radius: 15px;
   left: 0;
   top: -3px;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
 [type="checkbox"]:not(:checked) + label:after,
@@ -259,8 +258,8 @@ textarea:focus {
   border-radius: 50%;
   top: 7px;
   left: 10px;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
 [type="checkbox"]:checked + label:before {
@@ -283,8 +282,8 @@ textarea:focus {
   font-size: 14px;
   font-weight: bold;
   line-height: 22px;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
 }
 
 [type="checkbox"]:not(:checked) + label .ui:before {
@@ -300,7 +299,7 @@ textarea:focus {
 
 [type="checkbox"]:focus + label:before {
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
   margin-top: -1px;
 }
 
@@ -349,18 +348,16 @@ textarea:focus {
   background-color: #4cbc18;
   left: 0px;
   top: 0px;
-  -webkit-transition: all 0.5s ease, top 0.5s ease 0.5s, height 0.5s ease 0.5s,
-    background-color 0.5s ease 0.75s;
-  transition: all 0.5s ease, top 0.5s ease 0.5s, height 0.5s ease 0.5s,
-    background-color 0.5s ease 0.75s;
+  -webkit-transition: all .5s ease, top .5s ease .5s, height .5s ease .5s, background-color .5s ease .75s;
+  transition: all .5s ease, top .5s ease .5s, height .5s ease .5s, background-color .5s ease .75s;
 }
 
 a.btn-signup:hover,
 a.btn-signin:hover {
   cursor: pointer;
   background-color: #4cbc18;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
+  -webkit-transition: background-color .5s;
+  transition: background-color .5s;
   color: black;
 }
 
@@ -371,7 +368,6 @@ a.btn-signin:hover {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  padding-top: 24px;
   margin-top: -535px;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -379,5 +375,79 @@ a.btn-signin:hover {
 
 .forgot-password:hover {
   color: black;
+}
+
+.nav-area {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.btn-nav-round {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: green;
+  border: 1px ridge black;
+  margin-left: 2%;
+  margin-right: 2%;
+  color: white;
+  -webkit-box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.55);
+  box-shadow: 0px 5px 15px -4px rgba(0, 0, 0, 0.55);
+  text-decoration: none;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+  padding-top: 7px;
+}
+
+.btn-nav-round:hover {
+  background-color: black;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.btn-nav-profile {
+  width: 64px !important;
+  height: 64px !important;
+  margin-top: 5px !important;
+}
+
+.badge {
+  height: 35px !important;
+  width: 35px !important;
+  position: relative;
+  margin-top: 55px;
+  margin-right: 20px;
+  padding: 5px 10px;
+  border-radius: 50% !important;
+  background: red;
+  color: white;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+  -webkit-box-align: center !important;
+      -ms-flex-align: center !important;
+          align-items: center !important;
+}
+
+.glyph-icon {
+  font-size: 30px;
+  color: white;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.glyph-icon-notification {
+  margin-right: -42px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -22,10 +22,6 @@ def login():
             
             # input validation
             # --------------------------------
-            
-           
-           
-           
                 
         if auth_type == 'register':
             r_username = request.form.get('r_username')
