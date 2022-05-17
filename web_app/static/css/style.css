@@ -419,8 +419,8 @@ a.btn-signin:hover {
 }
 
 .badge {
-  height: 35px !important;
-  width: 35px !important;
+  height: 30px !important;
+  width: 30px !important;
   position: relative;
   margin-top: 55px;
   margin-right: 20px;
@@ -437,6 +437,7 @@ a.btn-signin:hover {
   -webkit-box-align: center !important;
       -ms-flex-align: center !important;
           align-items: center !important;
+  padding-right: 12px !important;
 }
 
 .glyph-icon {
@@ -448,6 +449,6 @@ a.btn-signin:hover {
 }
 
 .glyph-icon-notification {
-  margin-right: -42px;
+  margin-right: -36px;
 }
 /*# sourceMappingURL=style.css.map */
