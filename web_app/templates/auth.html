@@ -14,15 +14,15 @@
         <div class="frame-auth">
             <div class="auth-nav">
                 <ul class="links">
-                    <li class="signin-active"><a class="btn">Sign In</a></li>
-                    <li class="signup-inactive"><a class="btn">Register</a></li>
+                    <li class="signin-active"><a class="btn btn-switch">Sign In</a></li>
+                    <li class="signup-inactive"><a class="btn btn-switch">Register</a></li>
                 </ul>
             </div>
             <div ng-app ng-init="checked = false">
                 <!-- Login -->
                 <form method="post" class="form-signin" action="/auth?auth_type=login" name="form">
-                    <label for="l_email">Email</label>
-                    <input name="l_email" class="form-styling" type="text" placeholder="" />
+                    <label for="l_email">Username or email</label>
+                    <input name="l_email" class="form-styling" type="text"/>
                     <label for="l_password">Password</label>
                     <input name="l_password" class="form-styling" type="password" placeholder="" />
                     <input name="cb_keep_logged_in" type="checkbox" id="checkbox" />
@@ -50,7 +50,7 @@
 <script>
 
     $(function () {
-        $(".btn").click(function () {
+        $(".btn-switch").click(function () {
             $(".form-signin").toggleClass("form-signin-left");
             $(".form-signup").toggleClass("form-signup-left");
             $(".frame-auth").toggleClass("frame-long");

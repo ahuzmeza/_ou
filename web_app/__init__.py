@@ -1,38 +1,44 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import sqlalchemy
+
 
 db = SQLAlchemy()
 DB_NAME = 'database.db'
 
 # mysql connection config
 # mysql:///[username]:[password]@[hostname]/[database]
-con_username = 'root'
-con_password = ''
+con_username = 'guest'
+con_password = 'password'
 con_host = 'localhost'
 con_db_name = '_ou_db'
-unix_socket = '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock'
 # -------------------------------------------------
-con_db = f'mysql+pymysql:///{con_username}:{con_password}@{con_host}/{con_db_name}??unix_sock={unix_socket}'.format()
+con_db = f'mysql+pymysql://{con_username}:{con_password}@{con_host}/{con_db_name}'.format()
+
 
 def create_app():
     app = Flask(__name__)
-    
-    app.config['SECRET_KEY']='hjshjhdjah kjshkjdhjs'
+
+    app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     app.config['SQLALCHEMY_DATABASE_URI'] = con_db
-    db.init_app(app)
-    
-    app.config['SECRET_KEY'] = 'secret'
-    
     app.static_folder = 'static'
-    
+
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.auth_user'
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    db.init_app(app)
+
     from .views import views
     from .auth import auth
-    
+
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    
-    from .models import User    
-    
+
+    from .models import User
+
     return app

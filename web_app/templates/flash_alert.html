@@ -6,19 +6,30 @@
         {% if category == 'error' %}
             <div class="alert alert-danger alert-dismissable fade show" role="alert">
                 {{message}} 
-                <button type="button" class="btn btn-danger close" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="btn btn-danger close float-right float-end" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        {% elif category == 'error' %}
-            <div class="alert alert-succes alert-dismissable fade show" role="alert">
-                <h1> {{message}} </h1>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        {% elif category == 'success' %}
+            <div class="alert alert-success alert-dismissable fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn btn-success close float-end" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         {% endif %}
     {% endfor %}
 {% endif %}
 
 {% endwith %}
+
+<script>
+    $(document).ready(function() {
+        // show the alert
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 2000);
+    });
+</script>
 
 {% endblock %}

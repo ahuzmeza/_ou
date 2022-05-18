@@ -6,6 +6,12 @@
 
 {% block content %}
     <div class="container">
-        <h1 style="font-size:20px; color:white"> Dashboard </h1>
+        <h1 style="font-size:20px; color:white">  {{ current_user.username }}'s Dashboard </h1>
+        <a class="btn btn-primary" href="/logout">
+            logout_user
+        </a>
     </div>
 {% endblock %}
+
+
+
