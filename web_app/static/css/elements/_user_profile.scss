@@ -1,0 +1,124 @@
+
+.btn-add-friend {
+    background-color: $accent !important;
+    border-color: $accent !important;
+    color: $font-color !important;
+    margin: 0 auto;
+    border-radius: 20px !important;
+    padding: 10px 0 10px 0 !important;
+    margin-top: -20px;
+}
+
+.btn-tab-active {
+    background-color: $accent !important;
+    border-color: $accent !important;
+    color: $font-color !important;
+}
+
+.btn-add-friend:hover,
+.btn-add-friend:active,
+.btn-add-friend:focus {
+    background-color: $accent-darker !important;
+    border-color: $accent-darker !important;
+}
+
+.btn-add-friend:active {
+    transform: scale(1.1);
+}
+
+.search-box {
+    background-color: $bg-primary1 !important;
+    color: $font-color !important;
+}
+
+.search-box:focus {
+    background-color: $bg-primary2 !important;
+    color: $font-color !important;
+    border-color: $accent !important;
+}
+
+.btn-tab {
+    background-color: $primary;
+    color: $font-color !important;
+    border: 1px solid $accent !important;
+}
+
+.btn-tab:hover {
+    background-color: $accent !important;
+    color: $primary !important;
+}
+
+.btn-tab:focus {
+    background-color: $accent !important;
+    color: $font-color-invert !important;
+}
+
+.btn-edit { 
+    background-color: $primary !important;
+    color: $accent !important;
+    border: 1px solid $accent !important;
+}
+
+
+.btn-edit:hover {
+    background-color: $accent !important;
+    color: $primary !important;
+    border: 1px solid $accent !important;
+}
+
+.circle-profile {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    text-align: center;
+    border: 1px solid black;
+    box-shadow: 0px 5px 15px -4px rgba(0,0,0,0.55);
+    margin-top: 20px;
+}
+
+.circle-profile:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+
+.user-label {
+    padding: 15px 25px 15px 15px !important;
+    margin: 10px 10px 10px 10px!important;
+    border-radius: 20px !important;
+    background-color: $bg-primary1 !important;
+    color: $font-color !important;
+    font-weight: bold;
+    text-align: center !important;
+}
+
+.user-label:hover {
+    border: 1px solid $accent !important;
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px -4px rgba(0,0,0,0.55);
+    transform: translateY(-5px);
+}
+
+.user-label-delete {
+    border-radius: 50%;
+    padding: 11px;
+    margin-left: 20px;
+    font-size: 15px;
+    vertical-align: middle !important;
+}  
+
+.user-label-icon {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: $bg-primary3 !important;
+}
+
+
+// 'user-label-text' is the text inside the label
+// style it to be centered vertically
+.user-label-text {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+}

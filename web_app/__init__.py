@@ -21,6 +21,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
     app.config['SQLALCHEMY_DATABASE_URI'] = con_db
+    app.config['SESSION_PERMANENT'] = True
     app.static_folder = 'static'
 
     login_manager = LoginManager()
@@ -29,7 +30,7 @@ def create_app():
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        return User.query.get(user_id)
 
     db.init_app(app)
 
@@ -39,6 +40,8 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User
+    from .models import User, User_Relationship, User_Profile   
+   
+    db.create_all(app=app)
 
     return app

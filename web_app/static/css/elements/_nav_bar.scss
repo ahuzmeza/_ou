@@ -1,6 +1,7 @@
 .nav-area {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 25px;
 }
 
 .btn-nav-round{
@@ -24,6 +25,12 @@
 .btn-nav-round:hover {
     background-color: black;
     transform: scale(1.1);
+}
+
+.active-nav {
+    background-color: black;
+    color: white;
+    border-bottom: solid 4px $accent;
 }
 
 .btn-nav-profile {

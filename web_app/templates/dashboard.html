@@ -1,17 +1,27 @@
-{% extends "base.html" %}
+{% extends "base.html" %} \
 
 {% block nav %}
-    {% include "nav_bar.html" %}
-{% endblock %}
+<div class="d-flex flex-row justify-content-around nav-area primary-canvas">
+  <div class="d-flex justify-content-center">
+    <a class="btn-nav-round">
+      <span class="glyph-icon fa-solid fa-bell glyph-icon-notification"></span>
+      <span class="badge"> 10 </span>
+    </a>
+    <a href="/my-profile" class="btn-nav-round btn-nav-profile">
+      <span class="glyph-icon fa-solid fa-user"></span>
+    </a>
+    <a class="btn-nav-round">
+      <span class="glyph-icon fa-solid fa-gear"></span>
+    </a>
+  </div>
+</div>
+{% endblock %} 
 
 {% block content %}
-    <div class="container">
-        <h1 style="font-size:20px; color:white">  {{ current_user.username }}'s Dashboard </h1>
-        <a class="btn btn-primary" href="/logout">
-            logout_user
-        </a>
-    </div>
+<div class="container canvas-primary">
+  <h1 style="font-size: 20px; color: white">
+    {{ current_user.username }}'s Dashboard
+  </h1>
+  <a class="btn btn-primary" href="/logout"> logout_user </a>
+</div>
 {% endblock %}
-
-
-

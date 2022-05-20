@@ -1,0 +1,408 @@
+{% extends "base.html" %} {% block nav %}
+
+<div class="d-flex flex-row justify-content-around nav-area primary-canvas">
+  <a href="/" class="btn-nav-round">
+    <span class="glyph-icon fa-solid fa-chevron-left"></span>
+  </a>
+
+  <div class="d-flex justify-content-center">
+    <a class="btn-nav-round">
+      <span class="glyph-icon fa-solid fa-bell glyph-icon-notification"></span>
+      <span class="badge"> 10 </span>
+    </a>
+    <a href="/my-profile" class="btn-nav-round btn-nav-profile active-nav">
+      <span class="glyph-icon fa-solid fa-user"></span>
+    </a>
+    <a class="btn-nav-round" id="btn-edit">
+      <span class="glyph-icon fa-solid fa-gear"></span>
+    </a>
+  </div>
+
+  <a id="btn-save" class="btn-nav-round hidden">
+    <span class="glyph-icon fa-solid fa-check"></span>
+  </a>
+</div>
+
+<script>
+  // if btn-edit is clicked
+  // change its class to active-nav
+  // and remove btn-save class 'hidden'
+  $("#btn-edit").click(function () {
+    if ($(this).hasClass("active-nav")) {
+      $(this).removeClass("active-nav");
+      $("#btn-save").addClass("hidden");
+      hide_editable();
+    } else {
+      $(this).addClass("active-nav");
+      $("#btn-save").removeClass("hidden");
+      show_editable();
+    }
+  });
+
+  function hide_editable() {
+    $(".editable").addClass("hidden");
+    $(".editable").addClass("invisible");
+  }
+
+  function show_editable() {
+    $(".editable").removeClass("hidden");
+    $(".editable").removeClass("invisible");
+  }
+
+  // if btn-save is clicked
+  // change its class to hidden
+  // and remove btn-edit class 'active-nav'
+  $("#btn-save").click(function () {
+    $(this).addClass("hidden");
+    $("#btn-edit").removeClass("active-nav");
+    hide_editable();
+  });
+</script>
+
+{% endblock %} {% block content %}
+
+<div class="container canvas-primary3 font-primary">
+
+  <div class="row gutters-sm justify-content-center">
+    <div class="col-sm-12 col-md-11 col-xl-4 mb-3">
+      <a class="btn btn-danger" href="/logout"> Log Out </a>
+
+      <div class="card canvas-primary2">
+        <div class="card-body">
+          <div class="d-flex flex-column align-items-center text-center">
+
+            <div id="color-picker-wrapper" class="circle-profile">
+              <input name="Color Picker"
+                     type="color"
+                     id="color-picker"
+                     style="visibility: hidden;"
+                     value="{{ profile_color }}" />
+            </div>
+              <script>
+                // when circle-profile is clicked
+                // open color picker
+                var color_picker = document.getElementById("color-picker");
+                var color_picker_wrapper = document.getElementById("color-picker-wrapper");
+                color_picker.onchange = function() {
+                	color_picker_wrapper.style.backgroundColor = color_picker.value;    
+                }
+                color_picker_wrapper.style.backgroundColor = color_picker.value;
+                var color_picker = document.getElementById("color-picker");
+                var color_picker_wrapper = document.getElementById("color-picker-wrapper");
+                color_picker.onchange = function() {
+                	color_picker_wrapper.style.backgroundColor = color_picker.value;
+                  // call /my-profile/update-color with the new color 'color_picker.value'
+                  var xml = new XMLHttpRequest();
+                  xml.open("POST", "/my-profile/change-color", true);
+                  xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xml.send("color=" + color_picker.value);
+                }
+                color_picker_wrapper.style.backgroundColor = color_picker.value;
+                
+                // when color picker wrapper is clicked
+                // open color picker
+                color_picker_wrapper.onclick = function() {
+                  color_picker.click();
+                }
+              
+                
+              </script>
+            
+
+            <div class="mt-3">
+              <h4 class="canvas-primary1" style="padding: 10px 15px 10px 15px;">{{ current_user.username }}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card mt-3">
+        <ul class="list-group list-group-flush canvas-primary2">
+          <!--List Item -->
+          <li
+            class="no-bg list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+            <h6 class="mb-0 font-primary">Username</h6>
+            <button
+              name="change-username"
+              class="editable btn btn-edit font-secondary invisible"
+            >
+              Change
+            </button>
+          </li>
+
+          <li
+            class="no-bg list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+            <h6 class="mb-0 font-primary">Email:</h6>
+            <span class="font-secondary">{{ current_user.email }}</span>
+            <button
+              name="change-username"
+              class="editable btn btn-edit font-secondary invisible"
+            >
+              Change
+            </button>
+          </li>
+          <li
+            class="no-bg list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+            <h6 class="mb-0 font-primary">Phone:</h6>
+            <span class="font-secondary">
+              {% if current_user.phone: %} {{ current_user.phone }} {% else %}
+              None {% endif %}
+            </span>
+            <button
+              name="change-username"
+              class="editable btn btn-edit font-secondary invisible"
+            >
+              Change
+            </button>
+          </li>
+
+          <li
+            class="no-bg list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+            <h6 class="mb-0 font-primary">Password</h6>
+            <button
+              name="change-username"
+              class="editable btn btn-edit font-secondary invisible"
+            >
+              Change
+            </button>
+          </li>
+
+          <li
+          class="no-bg list-group-item d-flex justify-content-between align-items-center flex-wrap"
+          >
+          <div class="dropdown col-6">
+            <button class=" btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account state
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#"> Delete account </a>
+            </div>
+          </div>
+          </li>
+
+
+        </ul>
+
+        
+      </div>
+    </div>
+    <!-- /.col-md-4 -->
+
+    <div class="col-sm-12 col-md-11 col-xl-7 canvas-primary2">
+     <div class="card mb-3 bg-primary2">
+        <div class="card-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="btn btn-tab btn-tab-active"
+                id="friends-tab"
+                data-toggle="tab"
+                href="#friends"
+                role="tab"
+                aria-controls="friends"
+                aria-selected="true"
+                >Friends</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="btn btn-tab"
+                id="settings-tab"
+                data-toggle="tab"
+                href="#settings"
+                role="tab"
+                aria-controls="settings"
+                aria-selected="false"
+                >Settings</a
+              >
+            </li>
+          </ul>
+        </div> <!-- /.card-body -->
+      </div> <!-- /.nav-tabs -->
+
+      <div class="tab-pane fade" 
+            id="settings" 
+            role="tabpanel" 
+            aria-labelledby="settings-tab">
+
+          <div class="row" >
+            <div class="col-md-6">
+              <label> Setting test</label>
+            </div>
+            <div class="col-md-6">
+              <p>aaaa</p>
+            </div>
+            <div class="col-md-6">
+              <p>aaaa</p>
+            </div>
+            <div class="col-md-6">
+              <p>aaaa</p>
+            </div>
+          </div>
+      
+        </div><!-- /.tab-pane -->
+        
+        <div
+          class="tab-pane fade active show"
+          id="friends"
+          role="tabpanel"
+          aria-labelledby="friends-tab"
+        >
+        <div class="row add-friend editable hidden">
+          <button type="button" 
+                  class="btn btn-add-friend col-8" 
+                  id="add-friend"
+                  data-toggle="modal"
+                  data-target="#modal_add_friend">
+            <i class="fas fa-add"> Add friend </i>
+          </button>           
+        </div> <!-- /.row -->
+        
+        <br>
+
+          <div class="d-flex flex-wrap align-content-start">
+          {% for friend in friends %}
+              <!-- friend label and icon -->
+              <div class="user-label bg-primary1 d-flex ide={{ friend.id }}"> 
+                  <div class="user-label-icon"
+                       style="background-color: {{ friend.user_color_hex}} !important;">              
+                  </div> <!-- /. user-label-icon -->
+                  
+                  <span class="user-label-text align-middle">
+                    {{ friend.username }}
+                  </span> <!-- /.user-label-text -->  
+
+                  <button
+                        class="user-label-delete btn-danger btn-delete editable hidden"
+                        data-toggle="modal"
+                        data-target="#modal_unfriend"
+                        id="{{ friend.id }}">
+                      <span class="fas fa-trash"></span>
+                  </button>
+
+              </div> <!-- /. user-label -->
+          {% endfor %}
+      </div> <!-- /.tab-pane -->
+    
+    </div> <!-- /.col-md-8 -->
+  </div> <!-- /.row -->
+</div>  <!-- /.card -->
+
+<!-- Modal -->
+
+<div class="modal fade" id="modal_unfriend" tabindex="-1" role="dialog" aria-labelledby="modal_unfriend" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title-unfriend modal-title" id="modal_unfriend">
+        </h5> <!-- /.modal-title -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button method="post" type="button" class="btn btn-danger btn_delete_friend"data-dismiss="modal">Unfriend</button> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal_add_friend" tabindex="-1" role="dialog" aria-labelledby="modal_add_friend" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="padding: 20px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal_add_friend">
+            Search friend by username, email, or phone:
+        </h5>
+      </div>
+      <form action="/profile/add-friend" method="post" name="form_add_friend" id="form_add_friend">
+        <div class="modal-body row">
+          <input name="search-term" class="search-box" type="text" placeholder="Search friend">
+        </div>
+
+        <div class="modal-footer row justify-content-center">
+          <button method="post" type="button col-4" class="btn btn-success">Save changes</button>  
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(document).ready(function(){
+      // hide friends tab 
+      $('#settings').hide();
+      // hide 'add friend' row containing button
+    });
+
+// 'btn_delete_friend' in confirm modal dialog
+// if clicked send ajax request to delete friend @ /profile/delete-friend
+  $('.btn_delete_friend').click(function(){
+    // var friend_id = btn_delete_friend value in atribute id
+    var friend_id = $(this).attr('id');
+    // send ajax request to delete friend
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/my-profile/delete-friend", true);
+    xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xml.send("id_friend=" + friend_id);
+    xml.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // if request is successful, reload page
+        location.reload();
+      }
+    };
+  });
+
+// when a button of class 'btn-delete' is clicked
+// get that button's id
+  $('.btn-delete').click(function(){
+    var id = $(this).attr('id');
+    // set the modal's title to the id
+    $('.modal-title-unfriend').text("Unfriend " + id + " ?");
+    $('.btn_delete_friend').attr('id', id);
+  });
+
+
+// when button add-friend is clicked
+// get that button's id
+  $('.btn-add-friend').click(function(){
+    console.log(id);
+    document.getElementById("modal_add_friend").innerHTML = "Add friend " + id + " ?";
+  });
+
+// when button role tab is clicked
+// get that button's id
+// for all role 'tab' remove class 'focused'
+  $('.btn-tab').click(function(){
+    var id_pressed_tab = $(this).attr('id');
+    $('.btn-tab').removeClass('btn-tab-active');
+    $('#'+id_pressed_tab).addClass('btn-tab-active');
+    
+
+  });
+
+// if 'friends-tab' id btn is clicked
+// settings-tab id shoulde be hidden
+// friends-tab id should be shown
+// if 'settings-tab' btn is clicked
+// friends-tab shoulde be hidden
+// settings-tab should be shown  
+  $('.btn-tab').click(function(){
+    var id_pressed_tab = $(this).attr('id');
+    if(id_pressed_tab == 'friends-tab'){
+      $('#settings').hide();
+      $('#friends').show();
+    }
+    else if(id_pressed_tab == 'settings-tab'){
+      $('#friends').hide();
+      $('#settings').show();
+    }
+  });
+
+
+</script>
+
+{% endblock %}

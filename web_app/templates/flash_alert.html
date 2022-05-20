@@ -4,16 +4,23 @@
 {% if messages %}
     {% for category, message in messages %}
         {% if category == 'error' %}
-            <div class="alert alert-danger alert-dismissable fade show" role="alert">
-                {{message}} 
-                <button type="button" class="btn btn-danger close float-right float-end" data-dismiss="alert" aria-label="Close">
+            <div class="alert-short alert alert-danger alert-dismissable fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn btn-dark close float-right float-end" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
         {% elif category == 'success' %}
-            <div class="alert alert-success alert-dismissable fade show" role="alert">
+            <div class="alert-short alert alert-success alert-dismissable fade show" role="alert">
                 {{message}}
-                <button type="button" class="btn btn-success close float-end" data-dismiss="alert" aria-label="Close">
+                <button type="button" class="btn btn-dark close float-end" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% elif category == 'warning' %}
+            <div class="alert-short alert alert-warning alert-dismissable fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn btn-dark close float-end" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -28,7 +35,7 @@
         // show the alert
         setTimeout(function() {
             $(".alert").alert('close');
-        }, 2000);
+        }, 4700);
     });
 </script>
 
