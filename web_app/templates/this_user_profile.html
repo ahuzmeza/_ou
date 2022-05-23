@@ -23,41 +23,6 @@
   </a>
 </div>
 
-<script>
-  // if btn-edit is clicked
-  // change its class to active-nav
-  // and remove btn-save class 'hidden'
-  $("#btn-edit").click(function () {
-    if ($(this).hasClass("active-nav")) {
-      $(this).removeClass("active-nav");
-      $("#btn-save").addClass("hidden");
-      hide_editable();
-    } else {
-      $(this).addClass("active-nav");
-      $("#btn-save").removeClass("hidden");
-      show_editable();
-    }
-  });
-
-  function hide_editable() {
-    $(".editable").addClass("hidden");
-    $(".editable").addClass("invisible");
-  }
-
-  function show_editable() {
-    $(".editable").removeClass("hidden");
-    $(".editable").removeClass("invisible");
-  }
-
-  // if btn-save is clicked
-  // change its class to hidden
-  // and remove btn-edit class 'active-nav'
-  $("#btn-save").click(function () {
-    $(this).addClass("hidden");
-    $("#btn-edit").removeClass("active-nav");
-    hide_editable();
-  });
-</script>
 
 {% endblock %} {% block content %}
 
@@ -104,11 +69,8 @@
                 color_picker_wrapper.onclick = function() {
                   color_picker.click();
                 }
-              
-                
               </script>
             
-
             <div class="mt-3">
               <h4 class="canvas-primary1" style="padding: 10px 15px 10px 15px;">{{ current_user.username }}</h4>
             </div>
@@ -228,21 +190,45 @@
             role="tabpanel" 
             aria-labelledby="settings-tab">
 
-          <div class="row" >
-            <div class="col-md-6">
-              <label> Setting test</label>
-            </div>
-            <div class="col-md-6">
-              <p>aaaa</p>
-            </div>
-            <div class="col-md-6">
-              <p>aaaa</p>
-            </div>
-            <div class="col-md-6">
-              <p>aaaa</p>
-            </div>
+          <div class="row">
+            <h4 class="ms-4"> Account Visibility:</h4>
           </div>
-      
+
+          <div class="row d-flex flex editable hidden invisible row_visibility_settings" 
+               id="{{ current_user.visibility }}">
+            <div class="form-check form-check-inline">
+              <input class="visibility_setting" type="checkbox" id="cb_visibility_0" value="0">
+              <label class="form-check-label" for="cb_visibility_0"> Only me </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="visibility_setting" type="checkbox" id="cb_visibility_1" value="1">
+              <label class="form-check-label" for="cb_visibility_1"> Friends </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="visibility_setting" type="checkbox" id="cb_visibility_2" value="2">
+              <label class="form-check-label" for="cb_visibility_2"> Everyone </label>
+            </div>
+          </div> <!-- /.row -->
+
+          <script>
+              // when a 'visibility_setting' checkbox is checked
+              // change all other visibility_setting to not checked
+              // and change the current_user.visibility to the value of the checkbox  
+              // that was checked
+              $(".visibility_setting").change(function() {
+                var checked_value = $(this).val();
+                $(".visibility_setting").prop("checked", false);
+                $(this).prop("checked", true);
+                $("#{{ current_user.visibility }}").addClass("hidden");
+                $("#" + checked_value).removeClass("hidden");
+                // ajax call to change the visibility of the user  
+                var xml = new XMLHttpRequest();
+                xml.open("POST", "/my-profile/change-visibility", true);
+                xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xml.send("visibility=" + checked_value);
+              });
+            
+          </script>
         </div><!-- /.tab-pane -->
         
         <div
@@ -251,6 +237,14 @@
           role="tabpanel"
           aria-labelledby="friends-tab"
         >
+        {% if not friends %}
+        <div class="row">
+          <div class="col-8 empty-friends-prompt bg-primary1">
+             You can add friends in settings.
+          </div>
+        </div>
+        {% else: %}
+        {% endif %}
         <div class="row add-friend editable hidden">
           <button type="button" 
                   class="btn btn-add-friend col-8" 
@@ -260,21 +254,49 @@
             <i class="fas fa-add"> Add friend </i>
           </button>           
         </div> <!-- /.row -->
-        
-        <br>
+         
+<!-- ================================================================= -->        
+        {% if friends %}
+            <div class="row">
+                <h4 class="ms-4">Friends:</h4>
+            </div> <!-- /.row -->
+        <div class="d-flex flex-wrap align-content-start">
+        {% for friend in friends %}
+            <!-- friend label and icon -->
+            <div class="user-label bg-primary1 d-flex" id="{{ friend.id }}"> 
+                <div class="user-label-icon"
+                     style="background-color: {{ friend.user_color_hex}} !important;">              
+                </div> <!-- /. user-label-icon -->
+                <span class="user-label-text align-middle">
+                  {{ friend.username }}
+                </span> <!-- /.user-label-text -->  
+                <button
+                      class="user-label-delete btn-danger btn-delete editable hidden"
+                      data-toggle="modal"
+                      data-target="#modal_unfriend"
+                      id="{{ friend.id }}">
+                    <span class="fas fa-trash"></span>
+                </button>
+            </div> <!-- /. user-label -->
+        {% endfor %}
+        </div> <!-- /.d-flex -->
+        {% endif %}
 
+<!-- ================================================================= -->        
+          {% if friend_recieved %}                  
+              <div class="row mt-4">
+                  <h4 class="ms-4">Pending your accept:</h4>
+              </div> <!-- /.row -->
           <div class="d-flex flex-wrap align-content-start">
-          {% for friend in friends %}
+          {% for friend in friend_recieved %}
               <!-- friend label and icon -->
-              <div class="user-label bg-primary1 d-flex ide={{ friend.id }}"> 
+              <div class="user-label bg-primary1 d-flex" id="{{ friend.id }}"> 
                   <div class="user-label-icon"
                        style="background-color: {{ friend.user_color_hex}} !important;">              
                   </div> <!-- /. user-label-icon -->
-                  
                   <span class="user-label-text align-middle">
                     {{ friend.username }}
                   </span> <!-- /.user-label-text -->  
-
                   <button
                         class="user-label-delete btn-danger btn-delete editable hidden"
                         data-toggle="modal"
@@ -282,11 +304,41 @@
                         id="{{ friend.id }}">
                       <span class="fas fa-trash"></span>
                   </button>
-
               </div> <!-- /. user-label -->
           {% endfor %}
-      </div> <!-- /.tab-pane -->
-    
+          </div> <!-- /.d-flex -->
+          {% endif %}
+
+          {% if friend_sent %}
+          <div class="row mt-4">
+              <h4 class="ms-4">Pending their accept:</h4>
+          </div> <!-- /.row -->
+          <div class="d-flex flex-wrap align-content-start">
+          {% for friend in friend_sent %}
+              <!-- friend label and icon -->
+              <div class="user-label bg-primary1 d-flex" id="{{ friend.id }}"> 
+                  <div class="user-label-icon"
+                       style="background-color: {{ friend.user_color_hex}} !important;">              
+                  </div> <!-- /. user-label-icon -->
+                  <span class="user-label-text align-middle">
+                    {{ friend.username }}
+                  </span> <!-- /.user-label-text -->  
+                  <button
+                        class="user-label-delete btn-danger btn-delete editable hidden"
+                        data-toggle="modal"
+                        data-target="#modal_unfriend"
+                        id="{{ friend.id }}">
+                      <span class="fas fa-trash"></span>
+                  </button>
+              </div> <!-- /. user-label -->
+           {% endfor %}
+          </div> <!-- /.d-flex -->
+          {% endif %}
+
+  </div> <!-- /.tab-pane -->
+
+
+
     </div> <!-- /.col-md-8 -->
   </div> <!-- /.row -->
 </div>  <!-- /.card -->
@@ -335,8 +387,46 @@
   $(document).ready(function(){
       // hide friends tab 
       $('#settings').hide();
-      // hide 'add friend' row containing button
+      
+      // get user_visibility_choice = .row_visibility_settings's id
+      var user_visibility_choice = $('.row_visibility_settings').attr('id');
+      // find 'visibility_setting' checkbox where value = user_visibility_choice
+      $('#cb_visibility_'+user_visibility_choice).prop('checked', true);
     });
+
+// if btn-edit is clicked
+// change its class to active-nav
+// and remove btn-save class 'hidden'
+$("#btn-edit").click(function () {
+  if ($(this).hasClass("active-nav")) {
+    $(this).removeClass("active-nav");
+    $("#btn-save").addClass("hidden");
+    hide_editable();
+  } else {
+    $(this).addClass("active-nav");
+    $("#btn-save").removeClass("hidden");
+    show_editable();
+  }
+});
+
+function hide_editable() {
+  $(".editable").addClass("hidden");
+  $(".editable").addClass("invisible");
+}
+
+function show_editable() {
+  $(".editable").removeClass("hidden");
+  $(".editable").removeClass("invisible");
+}
+
+// if btn-save is clicked
+// change its class to hidden
+// and remove btn-edit class 'active-nav'
+$("#btn-save").click(function () {
+  $(this).addClass("hidden");
+  $("#btn-edit").removeClass("active-nav");
+  hide_editable();
+});
 
 // 'btn_delete_friend' in confirm modal dialog
 // if clicked send ajax request to delete friend @ /profile/delete-friend
@@ -354,6 +444,7 @@
         location.reload();
       }
     };
+        
   });
 
 // when a button of class 'btn-delete' is clicked
@@ -364,7 +455,6 @@
     $('.modal-title-unfriend').text("Unfriend " + id + " ?");
     $('.btn_delete_friend').attr('id', id);
   });
-
 
 // when button add-friend is clicked
 // get that button's id
@@ -380,8 +470,6 @@
     var id_pressed_tab = $(this).attr('id');
     $('.btn-tab').removeClass('btn-tab-active');
     $('#'+id_pressed_tab).addClass('btn-tab-active');
-    
-
   });
 
 // if 'friends-tab' id btn is clicked
@@ -402,7 +490,29 @@
     }
   });
 
+// when user-label is clicked
+// get that label's id
+// send ajax to views.profile-page 
+// to get the profile page of that user
+  $('.user-label').click(function() {
+    // if .user-label, .btn-delete inside is hidden
+    if($(this).find('.btn-delete').hasClass('hidden')) {
+        var id = $(this).attr('id');
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "/profile/"+id, true);
+        xml.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xml.send("got_user_id=" + id);
+        xml.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            // if request is successful, redirect to that page
+            window.location.href = "/profile/"+id;
+          }
+    }
+  }
+  });
 
 </script>
 
 {% endblock %}
+
+

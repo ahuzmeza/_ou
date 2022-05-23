@@ -1,243 +1,60 @@
 {% extends "base.html" %} {% block nav %}
 
 <div class="d-flex flex-row justify-content-around nav-area primary-canvas">
-  <a href="/profile" class="btn-nav-round">
+  <a href="/my-profile" class="btn-nav-round">
     <span class="glyph-icon fa-solid fa-chevron-left"></span>
   </a>
-
-  <div class="d-flex justify-content-center">
-    <a class="btn-nav-round">
-      <span class="glyph-icon fa-solid fa-bell glyph-icon-notification"></span>
-      <span class="badge"> 10 </span>
-    </a>
-    <a href="/profile" class="btn-nav-round btn-nav-profile active-nav">
-      <span class="glyph-icon fa-solid fa-user"></span>
-    </a>
-    <a class="btn-nav-round" id="btn-edit">
-      <span class="glyph-icon fa-solid fa-gear"></span>
-    </a>
-  </div>
-
-  <a id="btn-save" class="btn-nav-round invisible">
-    <span class="glyph-icon fa-solid fa-check"></span>
-  </a>
 </div>
-
-<script>
-  // if btn-edit is clicked
-  // change its class to active-nav
-  // and remove btn-save class 'invisible'
-  $("#btn-edit").click(function () {
-    if ($(this).hasClass("active-nav")) {
-      $(this).removeClass("active-nav");
-      $("#btn-save").addClass("invisible");
-      hide_editable();
-    } else {
-      $(this).addClass("active-nav");
-      $("#btn-save").removeClass("invisible");
-      show_editable();
-    }
-  });
-
-  function hide_editable() {
-    $(".editable").addClass("invisible");
-  }
-
-  function show_editable() {
-    $(".editable").removeClass("invisible");
-  }
-
-  // if btn-save is clicked
-  // change its class to invisible
-  // and remove btn-edit class 'active-nav'
-  $("#btn-save").click(function () {
-    $(this).addClass("invisible");
-    $("#btn-edit").removeClass("active-nav");
-    hide_editable();
-  });
-</script>
-
-{% endblock %} {% block content %}
-
-<div class="container canvas-primary3 font-primary">
-
-  <div class="row gutters-sm justify-content-center">
-    <div class="col-sm-12 col-md-11 col-xl-4 mb-3">
-      <a class="btn btn-danger" href="/logout"> Log Out </a>
-
+  
+  {% endblock %}
+  
+  {% block content %}
+  
+<div class="container canvas-primary3 font-primary col-sm-10 col-md-6 col-xl-4">
+  <div class="row justify-content-center">
+    <div class="col-sm-11 col-md-11 col-xl-11">
       <div class="card canvas-primary2">
         <div class="card-body">
           <div class="d-flex flex-column align-items-center text-center">
-            <img
-              src="https://bootdey.com/img/Content/avatar/avatar7.png"
-              alt="Admin"
-              class="rounded-circle canvas-primary1"
-              width="150"
-            />
+            <div class="circle-profile" style="background-color: {{ user.color }}"></div>
             <div class="mt-3">
-              <h4 class="canvas-primary1" style="padding: 5px 10px 5px 10px;">{{ current_user.username }}</h4>
+              <h4 class="canvas-primary1" style="padding: 5px 10px 5px 10px;">{{ user.username }}</h4>
             </div>
           </div>
         </div>
-      </div>  
-    <!-- /.col-md-4 -->
 
-    <div class="col-sm-12 col-md-11 col-xl-7 canvas-primary2">
-      <div class="card mb-3 bg-primary2">
-        <div class="card-body">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a
-                class="btn btn-tab btn-tab-active"
-                id="friends-tab"
-                data-toggle="tab"
-                href="#friends"
-                role="tab"
-                aria-controls="friends"
-                aria-selected="true"
-                >Friends</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-tab"
-                id="settings-tab"
-                data-toggle="tab"
-                href="#settings"
-                role="tab"
-                aria-controls="settings"
-                aria-selected="false"
-                >Settings</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- /.nav-tabs -->
-
-        <div
-          class="tab-pane fade"
-          id="settings"
-          role="tabpanel"
-          aria-labelledby="settings-tab"
-        >
-        <div class="row" >
-            <div class="col-md-6">
-              <label> Setting a</label>
-            </div>
-            <div class="col-md-6">
-              <p>aaaa</p>
-            </div>
+        <ul class="list-group list-group-flush bg-primary2 mb-4">        
+          <li
+            class="no-bg list-group-item ms-4 me-4 d-flex justify-content-start align-items-center flex-wrap"
+          >
+            <span class="fa-solid fa-envelope user-glyph" style="background-color: {{ user.color }};"></span>
+            <span class="font-primary ms-4">{{ user.email }}</span>
+          </li>
         
-        </div>
+          
+          <li
+            class="no-bg list-group-item ms-4 me-4 d-flex justify-content-start align-items-center flex-wrap"
+          >
+            <span class="fa-solid fa-phone user-glyph" style="background-color: {{ user.color }};"></span>
+            <span class="font-primary ms-4">
+              {% if user.phone %}
+                {{ user.phone }}
+              {% else %}
+                <span class="font-primary">No phone number</span>
+              {% endif %}
+            </span>
+          </li>
 
-        <div
-          class="tab-pane fade active show"
-          id="friends"
-          role="tabpanel"
-          aria-labelledby="profile-tab"
-        >
-          <br/>
-
-        
-
-          <div class="row ms-4">
-            <div class="col-md-2">
-              <p>Friend 1</p>
-            </div>
-            <div class="col-md-6">
-                <button
-                  class="btn btn-danger btn-sm btn-delete editable invisible"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter"
-                  id='1'
-                >
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>  <!-- /.col-md-6 -->
-          </div> <!-- /.row -->
+          <li
+            class="no-bg list-group-item ms-4 me-4 d-flex justify-content-start align-items-center flex-wrap"
+          >
+          
             
-          <div class="d-flex flex-wrap">
-            <div class="col-md-2 b">
-              <p>Friend 2</p>
-            </div>
-          </div>
+        </ul>
+      </div>  <!-- /.col-md-4 -->
 
-        
-        </div> <!-- /.tab-pane -->
     </div> <!-- /.col-md-8 -->
   </div> <!-- /.row -->
 </div> <!-- /.container -->
 
-{% endblock %}
-
-<!-- Modal -->
-
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">
-        </h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Unfriend</button>  
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="modal_add_friend" tabindex="-1" role="dialog" aria-labelledby="modal_add_friend" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content" style="padding: 20px;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal_add_friend">
-            Search friend by username, email, or phone:
-        </h5>
-      </div>
-      <form action="/profile/add-friend" method="post" name="form_add_friend" id="form_add_friend">
-        <div class="modal-body row">
-          <input name="search-term" class="search-box" type="text" placeholder="Search friend">
-        </div>
-
-        <div class="modal-footer row justify-content-center">
-          <button method="post" type="button col-4" class="btn btn-success">Save changes</button>  
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script>
-
-  // when a button of class 'btn-delete' is clicked
-  // get that button's id
-  
-  $('.btn-delete').click(function(){
-    var id = $(this).attr('id');
-    console.log(id);
-    document.getElementById("modal_unfriend_title").innerHTML = "Unfriend " + id + "?";
-  });
-
-  // when button add-friend is clicked
-  // get that button's id
-  $('.btn-add-friend').click(function(){
-    console.log(id);
-    document.getElementById("exampleModalLongTitle").innerHTML = "Add friend " + id + " ?";
-  });
-
-  // when button role tab is clicked
-  // get that button's id
-  // for all role 'tab' remove class 'focused'
-    
-  $('.btn-tab').click(function(){
-    var id = $(this).attr('id');
-    $('.btn-tab').removeClass('btn-tab-active');
-    $('#'+id).addClass('btn-tab-active');
-  });
-  
-</script>
-
-{% endblock %}
+  {% endblock %}

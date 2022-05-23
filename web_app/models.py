@@ -26,8 +26,11 @@ class User_Profile(db.Model):
     __tablename__ = 'User_Profile'
     id_user = db.Column(db.String(36), primary_key=True)
     user_color_hex = db.Column(db.String(8), default='#65CC4C')
-
-
+    profile_visibility = db.Column(db.Integer, default=0) 
+    # 0 - invisible 
+    # 1 - visible to friends
+    # 2 - visible to all
+    
 class Rental_Unit(db.Model):
     __tablename__ = 'Rental_Unit'
     id = db.Column(db.Integer, primary_key=True)

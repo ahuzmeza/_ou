@@ -1,4 +1,4 @@
--- SQL used for to create atestatDB
+sa-- SQL used for to create atestatDB
 
 CREATE TABLE users (
   id int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,

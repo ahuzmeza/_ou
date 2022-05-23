@@ -5,12 +5,11 @@
     color: $font-color !important;
     margin: 0 auto;
     border-radius: 20px !important;
-    padding: 10px 0 10px 0 !important;
-    margin-top: -20px;
+    padding: 17px !important;
 }
 
 .btn-tab-active {
-    background-color: $accent !important;
+    background-color: $accent-darker !important;
     border-color: $accent !important;
     color: $font-color !important;
 }
@@ -38,7 +37,6 @@
 }
 
 .btn-tab {
-    background-color: $primary;
     color: $font-color !important;
     border: 1px solid $accent !important;
 }
@@ -58,7 +56,6 @@
     color: $accent !important;
     border: 1px solid $accent !important;
 }
-
 
 .btn-edit:hover {
     background-color: $accent !important;
@@ -81,6 +78,16 @@
     cursor: pointer;
 }
 
+.empty-friends-prompt {
+    padding: 17px !important;
+    margin: 0 auto;
+    border-radius: 20px !important;
+    background-color: $bg-primary1 !important;
+    color: $font-color !important;
+    font-weight: bold;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
 
 .user-label {
     padding: 15px 25px 15px 15px !important;
@@ -90,6 +97,7 @@
     color: $font-color !important;
     font-weight: bold;
     text-align: center !important;
+    cursor: pointer;
 }
 
 .user-label:hover {

@@ -10,10 +10,17 @@ body {
     background-size: cover;
     background-color: $bg-primary1 !important;
 }
+
+.user-glyph {    
+    padding: 10px; font-size: 2em; 
+    border-radius: 50% !important;
+}
+
 .modal-backdrop
 {
     opacity:0.6 !important;
 }
+
 .hidden {
     display: none !important;
 }

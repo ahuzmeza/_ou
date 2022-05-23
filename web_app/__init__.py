@@ -45,3 +45,6 @@ def create_app():
     db.create_all(app=app)
 
     return app
+
+
+# move code to app.py
